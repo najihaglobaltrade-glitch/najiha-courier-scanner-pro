@@ -1,0 +1,9 @@
+{
+  "name": "NAJIHA COURIER SCANNER PRO",
+  "short_name": "NAJIHA COURIER",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#101b2d",
+  "theme_color": "#101b2d",
+  "description": "Aplikasi pencatatan paket kurir, COD, dan WhatsApp"
+}

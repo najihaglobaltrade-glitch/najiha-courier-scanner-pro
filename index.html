@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101b2d">
+<meta name="description" content="NAJIHA COURIER SCANNER PRO - aplikasi pencatatan paket kurir">
+<link rel="manifest" href="manifest.json">
+<title>NAJIHA COURIER SCANNER PRO</title>
+<style>
+:root{--navy:#10213a;--navy2:#172d4b;--panel:#fff;--bg:#f3f6fb;--ink:#18263b;--muted:#718096;--line:#e4eaf2;--orange:#f2a12b;--orange2:#ffc15c;--green:#16865d;--red:#c94d58;--blue:#315d91}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;padding-bottom:34px}
+header{padding:25px 20px 27px;background:radial-gradient(circle at 88% 5%,#294b70 0,transparent 36%),linear-gradient(135deg,var(--navy2),var(--navy));color:#fff;border-radius:0 0 26px 26px;box-shadow:0 10px 28px #10213a20}
+.brand{font-size:10px;letter-spacing:2.3px;color:var(--orange2);font-weight:850}
+.brandtitle{font-size:23px;line-height:1.15;font-weight:900;margin:8px 0 6px;letter-spacing:.2px}
+.sub{color:#c4d1e2;font-size:12px}
+main{max-width:760px;margin:auto;padding:18px 15px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:-3px 0 17px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:15px 16px;box-shadow:0 5px 16px #152b4610;min-height:92px}
+.stat small{display:block;color:var(--muted);font-size:11px;font-weight:650;letter-spacing:.2px}
+.stat strong{font-size:23px;display:block;margin-top:7px;color:var(--navy);font-weight:850;overflow-wrap:anywhere}
+.stat .accent{color:var(--green)}
+nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:15px;background:#e8edf5;padding:5px;border-radius:14px}
+nav button{padding:12px 5px;font-size:12px;min-height:43px}
+button{border:0;border-radius:11px;background:var(--orange);color:#17263b;padding:13px 15px;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 3px 8px #c17a171c;transition:transform .12s,filter .12s}
+button:active{transform:scale(.98);filter:brightness(.97)}
+button.secondary{background:#edf2f8;color:#31445e;border:1px solid #dce5ef;box-shadow:none}
+button.danger{background:#fff0f0;color:#a93642;border:1px solid #f4d7da;box-shadow:none}
+button.green{background:var(--green);color:#fff}
+button:disabled{opacity:.45}
+h2{font-size:17px;margin:0 0 15px;color:var(--navy);font-weight:850}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:19px;padding:18px;box-shadow:0 6px 22px #152b460c}
+.field{margin:13px 0}
+.field label{display:block;color:#52647c;font-size:11px;font-weight:750;letter-spacing:.2px;margin-bottom:7px}
+input,textarea,select{width:100%;background:#fbfcfe;color:var(--ink);border:1px solid #d9e2ed;border-radius:11px;padding:13px;font:inherit;font-size:14px;outline:none}
+input:focus,textarea:focus,select:focus{border-color:#e5a13a;box-shadow:0 0 0 3px #f2a12b22}
+textarea{min-height:76px;resize:vertical}
+.row{display:flex;gap:10px}.row>*{flex:1;min-width:0}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.actions button{flex:1}
+#reader{width:100%;overflow:hidden;border-radius:13px;margin-top:12px;background:#0b1320}#reader video{border-radius:13px}
+.hidden{display:none!important}
+.hint{font-size:11px;color:var(--muted);line-height:1.55}
+.package{border:1px solid var(--line);border-radius:15px;padding:14px;margin:11px 0;background:#fff;box-shadow:0 3px 12px #152b4609}
+.package-top{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.resi{font-weight:850;color:#bd7819;overflow-wrap:anywhere;font-size:14px}
+.pill{font-size:10px;font-weight:800;padding:5px 9px;border-radius:20px;background:#edf1f6;color:#52647c;white-space:nowrap}
+.pill.done{background:#e1f5ec;color:#13734f}.pill.fail{background:#fff0f0;color:#b13d49}
+.details{font-size:12px;color:#52647c;line-height:1.65;margin:10px 0;white-space:pre-line}
+.empty{text-align:center;padding:28px 12px;color:var(--muted);font-size:13px}
+.notice{background:#fff8e9;border:1px solid #f4dfb5;color:#76521b;padding:12px 13px;border-radius:12px;font-size:11px;line-height:1.55;margin:12px 0}
+footer{text-align:center;color:#8794a7;font-size:10px;padding:18px}
+@media(min-width:600px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.stat{min-height:100px}main{padding:22px}}
+</style>
+</head>
+<body>
+<header><div class="brand">NAJIHA • DELIVERY MANAGEMENT</div><div class="brandtitle">COURIER SCANNER PRO</div><div class="sub">Smart parcel operations · COD & non-COD tracking</div></header>
+<main>
+<section class="stats">
+ <div class="stat"><small>Total paket</small><strong id="total">0</strong></div>
+ <div class="stat"><small>Berhasil diantar</small><strong id="delivered" class="accent">0</strong></div>
+ <div class="stat"><small>Belum diantar</small><strong id="pending">0</strong></div>
+ <div class="stat"><small>Total tagihan COD</small><strong id="cod">Rp0</strong></div>
+</section>
+<nav>
+<button onclick="showTab('form')">＋ Paket</button><button class="secondary" onclick="showTab('list')">▤ Daftar</button><button class="secondary" onclick="showTab('report')">▥ Laporan</button>
+</nav>
+<section id="tab-form" class="card">
+<h2>Tambah / Perbarui Paket</h2>
+<div class="notice">Barcode pada label umumnya hanya berisi nomor resi. Nama, alamat, nomor WhatsApp, dan COD perlu diisi dari data pengiriman yang kamu miliki.</div>
+<div class="actions"><button onclick="startScan()">▦ Scan barcode</button><button class="secondary" onclick="stopScan()">Tutup kamera</button></div>
+<div id="reader" class="hidden"></div><p id="scanmsg" class="hint">Kamera akan meminta izin saat pertama digunakan. Scan memerlukan HTTPS dan koneksi internet untuk memuat pustaka scanner.</p>
+<div class="field"><label>Nomor resi *</label><input id="resi" placeholder="Scan atau ketik nomor resi"></div>
+<div class="field"><label>Nama penerima *</label><input id="name" placeholder="Nama penerima"></div>
+<div class="field"><label>Alamat lengkap *</label><textarea id="address" placeholder="Alamat penerima"></textarea></div>
+<div class="field"><label>Jenis pembayaran *</label><select id="paymentType" onchange="toggleCOD()"><option value="COD">COD (Bayar di tempat)</option><option value="Non-COD">Non-COD (Sudah dibayar)</option></select></div><div class="row"><div class="field"><label>Nomor WhatsApp</label><input id="phone" inputmode="tel" placeholder="08xxxxxxxxxx"></div><div class="field" id="codField"><label>Nominal COD (Rp)</label><input id="codInput" type="number" min="0" placeholder="Contoh: 150000"></div></div>
+<div class="field"><label>Catatan (opsional)</label><input id="note" placeholder="Contoh: rumah pagar hijau"></div>
+<div class="actions"><button class="green" onclick="savePackage()">Simpan paket</button><button class="secondary" onclick="clearForm()">Kosongkan</button></div>
+</section>
+<section id="tab-list" class="card hidden"><h2>Daftar Paket</h2><input id="search" placeholder="Cari resi / nama penerima..." oninput="renderList()"><div id="packages"></div></section>
+<section id="tab-report" class="card hidden"><h2>Laporan Pengiriman</h2><div id="reportText" class="details"></div><div class="actions"><button onclick="exportCSV()">Unduh CSV</button><button class="secondary" onclick="backupJSON()">Cadangkan JSON</button></div><p class="hint">Data tersimpan di browser HP ini. Ekspor cadangan secara berkala agar data tidak hilang saat data browser dibersihkan.</p></section>
+</main>
+<footer>NAJIHA COURIER SCANNER PRO • Versi 1.0 • Penyimpanan lokal perangkat</footer>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script>
+const KEY='najihaCourierPackagesV1';let scanner=null,scanning=false,editingId=null;
+const $=id=>document.getElementById(id);
+const getData=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}};
+const setData=data=>localStorage.setItem(KEY,JSON.stringify(data));
+const money=n=>'Rp'+Number(n||0).toLocaleString('id-ID');
+function showTab(tab){['form','list','report'].forEach(t=>$('tab-'+t).classList.toggle('hidden',t!==tab));if(tab==='list')renderList();if(tab==='report')renderReport();window.scrollTo(0,0)}
+async function startScan(){
+ if(typeof Html5Qrcode==='undefined'){$('scanmsg').textContent='Pustaka scanner belum termuat. Periksa koneksi internet lalu muat ulang halaman.';return}
+ if(scanning)return;
+ $('reader').classList.remove('hidden');$('scanmsg').textContent='Meminta izin kamera...';
+ try{
+  scanner=new Html5Qrcode('reader');
+  await scanner.start({facingMode:'environment'},{fps:10,qrbox:{width:260,height:130}},async text=>{
+   $('resi').value=text;$('scanmsg').textContent='Barcode terbaca: '+text;await stopScan();
+  },()=>{});
+  scanning=true;$('scanmsg').textContent='Kamera aktif. Arahkan barcode ke dalam bingkai.';
+ }catch(err){$('scanmsg').textContent='Kamera tidak dapat dibuka. Pastikan situs dibuka melalui HTTPS, izin kamera diizinkan, dan kamera tidak dipakai aplikasi lain. Detail: '+err;}
+}
+async function stopScan(){if(scanner&&scanning){try{await scanner.stop();await scanner.clear()}catch(e){}}scanning=false;$('reader').classList.add('hidden')}
+function clearForm(){['resi','name','address','phone','codInput','note'].forEach(id=>$(id).value='');$('paymentType').value='COD';toggleCOD();editingId=null}
+function toggleCOD(){const isCOD=$('paymentType').value==='COD';$('codField').classList.toggle('hidden',!isCOD);if(!isCOD)$('codInput').value='0'}
+function savePackage(){
+ const resi=$('resi').value.trim(),name=$('name').value.trim(),address=$('address').value.trim(),paymentType=$('paymentType').value,codValue=Number($('codInput').value||0);
+ if(!resi||!name||!address){alert('Nomor resi, nama penerima, dan alamat wajib diisi.');return}
+ if(paymentType==='COD'&&codValue<=0){alert('Masukkan nominal COD yang harus ditagih.');return}
+ let data=getData(),existing=data.findIndex(p=>p.resi===resi),old=existing>=0?data[existing]:{};
+ const item={id:editingId||old.id||String(Date.now()),resi,name,address,phone:$('phone').value.trim(),paymentType,cod:paymentType==='COD'?codValue:0,note:$('note').value.trim(),status:old.status||'Belum diantar',created:old.created||new Date().toISOString(),updated:new Date().toISOString()};
+ if(existing>=0)data[existing]=item;else data.unshift(item);
+ setData(data);clearForm();refresh();alert('Paket '+paymentType+' berhasil disimpan.');showTab('list');
+}
+function waLink(p){
+ let phone=(p.phone||'').replace(/\D/g,'');if(phone.startsWith('0'))phone='62'+phone.slice(1);if(!phone.startsWith('62')&&phone)phone='62'+phone;
+ const paymentLine=p.paymentType==='COD'?`Tagihan COD: ${money(p.cod)}`:'Pembayaran: Non-COD (sudah dibayar)';\n const msg=`Halo ${p.name}, saya kurir yang mengantar paket Anda.%0AResi: ${encodeURIComponent(p.resi)}%0AAlamat: ${encodeURIComponent(p.address)}%0A${encodeURIComponent(paymentLine)}%0AMohon konfirmasi apakah ada di alamat. Terima kasih.`;
+ if(!phone){alert('Nomor WhatsApp belum diisi.');return}window.open('https://wa.me/'+phone+'?text='+msg,'_blank');
+}
+function renderList(){
+ const q=($('search').value||'').toLowerCase(),data=getData().filter(p=>(p.resi+' '+p.name+' '+p.address).toLowerCase().includes(q));
+ $('packages').innerHTML=data.length?'':'<div class="empty">Belum ada paket yang cocok.</div>';
+ data.forEach(p=>{
+  const el=document.createElement('div');el.className='package';
+  const statusClass=p.status==='Berhasil'?'done':p.status==='Gagal'?'fail':'';
+  el.innerHTML=`<div class="package-top"><div class="resi"></div><span class="pill ${statusClass}"></span></div><div class="details"></div><div class="actions"><button class="green">WhatsApp</button><button class="secondary">Edit</button><button class="secondary">Status</button><button class="danger">Hapus</button></div>`;
+  el.querySelector('.resi').textContent=p.resi;el.querySelector('.pill').textContent=p.status;
+  el.querySelector('.details').textContent=`${p.name}\n${p.address}\nWA: ${p.phone||'-'} • Pembayaran: ${p.paymentType|| (Number(p.cod)>0?'COD':'Non-COD')} • ${p.paymentType==='COD'||Number(p.cod)>0?money(p.cod):'Sudah dibayar'}${p.note?'\nCatatan: '+p.note:''}`;
+  const buttons=el.querySelectorAll('button');buttons[0].onclick=()=>waLink(p);buttons[1].onclick=()=>editPackage(p.id);buttons[2].onclick=()=>changeStatus(p.id);buttons[3].onclick=()=>deletePackage(p.id);$('packages').appendChild(el);
+ });
+}
+function editPackage(id){const p=getData().find(x=>x.id===id);if(!p)return;editingId=id;$('resi').value=p.resi;$('name').value=p.name;$('address').value=p.address;$('phone').value=p.phone;$('paymentType').value=p.paymentType||(Number(p.cod)>0?'COD':'Non-COD');$('codInput').value=p.cod;$('note').value=p.note;toggleCOD();showTab('form')}
+function changeStatus(id){let d=getData(),p=d.find(x=>x.id===id);if(!p)return;let next=prompt('Ketik status: Belum diantar, Berhasil, atau Gagal',p.status);if(!next)return;if(!['Belum diantar','Berhasil','Gagal'].includes(next)){alert('Status tidak dikenal.');return}p.status=next;setData(d);refresh()}
+function deletePackage(id){if(!confirm('Hapus paket ini?'))return;setData(getData().filter(p=>p.id!==id));refresh()}
+function renderReport(){let d=getData(),done=d.filter(p=>p.status==='Berhasil').length,fail=d.filter(p=>p.status==='Gagal').length,pending=d.filter(p=>p.status==='Belum diantar').length,codList=d.filter(p=>p.paymentType==='COD'||(!p.paymentType&&Number(p.cod)>0)),nonList=d.filter(p=>p.paymentType==='Non-COD'||(!p.paymentType&&Number(p.cod)===0)),cod=codList.reduce((s,p)=>s+Number(p.cod||0),0),collected=codList.filter(p=>p.status==='Berhasil').reduce((s,p)=>s+Number(p.cod||0),0);$('reportText').textContent=`Total paket: ${d.length}\nPaket COD: ${codList.length}\nPaket Non-COD: ${nonList.length}\nTotal tagihan COD: ${money(cod)}\nCOD paket berhasil diantar: ${money(collected)}\n\nBerhasil: ${done}\nGagal: ${fail}\nBelum diantar: ${pending}`}
+function refresh(){let d=getData();$('total').textContent=d.length;$('delivered').textContent=d.filter(p=>p.status==='Berhasil').length;$('pending').textContent=d.filter(p=>p.status==='Belum diantar').length;$('cod').textContent=money(d.reduce((s,p)=>s+Number(p.cod||0),0));if(!$('tab-list').classList.contains('hidden'))renderList();if(!$('tab-report').classList.contains('hidden'))renderReport()}
+function exportCSV(){let d=getData(),rows=[['Resi','Nama','Alamat','WhatsApp','Jenis Pembayaran','Nominal COD','Status','Catatan'],...d.map(p=>[p.resi,p.name,p.address,p.phone,p.paymentType||(Number(p.cod)>0?'COD':'Non-COD'),p.cod,p.status,p.note])];let csv=rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n'),a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download='laporan-kurir-najiha.csv';a.click();URL.revokeObjectURL(a.href)}
+function backupJSON(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(getData(),null,2)],{type:'application/json'}));a.download='backup-najiha-courier.json';a.click();URL.revokeObjectURL(a.href)}
+toggleCOD();refresh();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
