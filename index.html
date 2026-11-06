@@ -115,7 +115,8 @@ function savePackage(){
 }
 function waLink(p){
  let phone=(p.phone||'').replace(/\D/g,'');if(phone.startsWith('0'))phone='62'+phone.slice(1);if(!phone.startsWith('62')&&phone)phone='62'+phone;
- const paymentLine=p.paymentType==='COD'?`Tagihan COD: ${money(p.cod)}`:'Pembayaran: Non-COD (sudah dibayar)';\n const msg=`Halo ${p.name}, saya kurir yang mengantar paket Anda.%0AResi: ${encodeURIComponent(p.resi)}%0AAlamat: ${encodeURIComponent(p.address)}%0A${encodeURIComponent(paymentLine)}%0AMohon konfirmasi apakah ada di alamat. Terima kasih.`;
+ const paymentLine=p.paymentType==='COD'?`Tagihan COD: ${money(p.cod)}`:'Pembayaran: Non-COD (sudah dibayar)';
+ const msg=`Halo ${p.name}, saya kurir yang mengantar paket Anda.%0AResi: ${encodeURIComponent(p.resi)}%0AAlamat: ${encodeURIComponent(p.address)}%0A${encodeURIComponent(paymentLine)}%0AMohon konfirmasi apakah ada di alamat. Terima kasih.`;
  if(!phone){alert('Nomor WhatsApp belum diisi.');return}window.open('https://wa.me/'+phone+'?text='+msg,'_blank');
 }
 function renderList(){
